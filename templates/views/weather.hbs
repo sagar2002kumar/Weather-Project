@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>headerlinks}}
+</head>
+<body>
+  {{>navbar}}
+    <!-- Main Header -->
+     <div class="container-fluid main_header">
+         <div class="row">
+           <div class="col-md-10 col-12 mx-auto">
+              <div class="main_content">
+                <form class="temp_form">
+                   <input type="text" id="cityName" placeholder="Enter Your city Name" autocomplete="off">
+                   <input type="submit" value="search" id="submitBtn">
+                </form>
+              </div>   
+              <div class="tempInformation">
+                <div class="top_layer">
+                  <p id="day">TuesDay</p>
+                  <p id="today_date">26 Jan</p>
+                </div>
+                <div class="main_layer">
+                    <p id="city_name">Get Output Here</p>
+                    <div class="middle_layer data_hide">
+                        <p id="temp"><span id="temp_real_val">O</span><sup>o</sup>F</p>
+                         <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                    </div>
+                </div>
+              </div>
+           </div> 
+        </div>
+     </div>
+     <!-- Footer-->
+     {{footer}}
+     <script src="js/main.js"></script>
+     <script>
+        const getcurDay  = () =>{
+            const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thrusday","Friday","Saturday"];
+            let curTime = new Date();
+            days = weekday[curTime.getDay()];
+            let day = document.getElementById("day");
+            day.innerText = days;
+        }
+         getcurDay();
+        const getcurTime  = () =>{
+            var months = ['JAN', 'FEB', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC'];
+            var now = new Date();
+            var month = months[now.getMonth()];
+            var date = now.getDate();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let periods = "AM";
+            if(periods > 11){
+                periods = "PM";
+                if(hours >= 12){
+                    hours -= 12;
+                }
+            }
+            if(minutes < 0){
+                minutes = "0" + minutes;
+            }
+           return `${month} ${date} | ${hours} : ${minutes}${periods}`;
+        }
+        today_date.innerHTML =  getcurTime();
+    </script>
+</body>
+</html>
